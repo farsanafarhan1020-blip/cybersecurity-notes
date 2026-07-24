@@ -246,3 +246,9 @@ Tool or technique used to exploit a vulnerability.
 The path used to carry out an attack.
 
 ---
+> **💡 Interview Tip:**  
+> Remember this sequence:
+>
+> **Threat → Vulnerability → Exploit → Attack Vector → Risk**
+>
+> Interviewers often ask you to explain these terms with a real-world example. Using the **house analogy** or a **website attack scenario** makes your answer much stronger.
