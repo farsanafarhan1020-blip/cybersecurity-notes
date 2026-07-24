@@ -206,3 +206,5 @@ Imagine your **WhatsApp account**:
 | RBAC | File Permissions | Disaster Recovery |
 
 ---
+> **💡 Interview Tip:**  
+> When asked about the CIA Triad, don't just define each principle. Explain it with a real-world example such as **online banking**, **hospital systems**, or **WhatsApp**. This shows practical understanding rather than memorization.
