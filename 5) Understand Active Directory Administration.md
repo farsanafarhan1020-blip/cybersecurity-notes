@@ -784,4 +784,665 @@ Examples:
 
 ### What Are Administrative Practices?
 
-Administrative practices are the procedures and responsibilities administrators
+Administrative practices are the procedures and responsibilities administrators follow to operate Active Directory securely, reliably, and consistently.
+
+Good administration is not just about creating accounts and assigning permissions. It also includes change management, documentation, monitoring, auditing, backup, and incident response.
+
+### 5.1 Principle of Least Privilege
+
+The Principle of Least Privilege (PoLP) means giving users and administrators only the permissions necessary to perform their responsibilities.
+
+Example:
+
+A developer needs access to development resources.
+
+They do not automatically need:
+
+- Domain Admin privileges.
+- Access to HR records.
+- Access to finance systems.
+- Permission to modify domain security policies.
+
+Granting unnecessary permissions increases security risk.
+
+### 5.2 Role-Based Administration
+
+Administrators should receive permissions based on their responsibilities.
+
+Example:
+
+| Administrative Role | Responsibility |
+|---|---|
+| Help Desk Administrator | Password resets and basic account support |
+| User Administrator | Approved user account management |
+| Group Administrator | Manages specified groups |
+| Server Administrator | Manages approved servers |
+| Domain Administrator | Performs high-level domain administration |
+
+The exact permissions should be delegated rather than assuming that every person with an administrative job title requires broad privileges.
+
+### 5.3 Separate Administrative Accounts
+
+Administrators should maintain separate accounts for normal and privileged activities.
+
+Example:
+
+```text
+Normal Account:
+alice
+
+Administrative Account:
+alice-admin
+```
+
+The normal account is used for everyday work.
+
+The administrative account is used only for approved administrative tasks.
+
+This reduces the chance that everyday browsing, email, or application activity exposes privileged credentials.
+
+### 5.4 Account Lifecycle Management
+
+Organizations should establish clear procedures for:
+
+- New employee onboarding.
+- Role and department changes.
+- Temporary access.
+- Employee termination.
+- Contractor account expiration.
+- Inactive account review.
+
+This ensures that access is granted and removed at the correct time.
+
+### 5.5 Change Management
+
+Changes to Active Directory can affect many users and systems.
+
+Examples:
+
+- Modifying a Group Policy.
+- Changing domain security settings.
+- Adding a user to a privileged group.
+- Changing permissions on shared folders.
+- Modifying domain controller configurations.
+
+A secure change-management process should include:
+
+1. Document the requested change.
+2. Identify security and operational risks.
+3. Obtain approval.
+4. Test in a controlled environment.
+5. Implement the change.
+6. Verify the result.
+7. Document the final configuration.
+
+### 5.6 Logging and Monitoring
+
+Administrators and security teams should monitor important Active Directory events.
+
+Examples:
+
+| Event ID | Activity |
+|---|---|
+| 4720 | User account created |
+| 4722 | User account enabled |
+| 4723 | Attempt to change an account password |
+| 4724 | Attempt to reset an account password |
+| 4725 | User account disabled |
+| 4726 | User account deleted |
+| 4728 | Member added to a security-enabled global group |
+| 4732 | Member added to a security-enabled local group |
+| 4756 | Member added to a security-enabled universal group |
+| 4740 | User account locked out |
+| 4739 | Domain policy changed |
+
+These are Windows Security log event IDs. Whether they are recorded depends on the relevant audit policy and system configuration.
+
+Administrators should investigate suspicious events rather than treating every event as malicious.
+
+### 5.7 Backup and Recovery
+
+Active Directory is critical infrastructure. Organizations need reliable backup and recovery procedures.
+
+Important practices include:
+
+- Regular System State backups of domain controllers.
+- Secure backup storage.
+- Offline or immutable backup copies where possible.
+- Restricted backup access.
+- Regular recovery testing.
+- Documented disaster recovery procedures.
+
+Backups should be protected because attackers may attempt to compromise or delete them during an intrusion.
+
+### 5.8 Documentation
+
+Administrators should document:
+
+- Domain structure.
+- Domain controllers.
+- Organizational Units.
+- Important security groups.
+- Group Policy Objects.
+- Privileged accounts.
+- Delegated permissions.
+- Administrative procedures.
+- Backup and recovery processes.
+
+Documentation makes troubleshooting, auditing, and incident response more effective.
+
+### 5.9 Periodic Access Reviews
+
+Access should not be granted permanently without review.
+
+Administrators should regularly check:
+
+- Inactive accounts.
+- Privileged users.
+- Group memberships.
+- Service accounts.
+- Shared folder permissions.
+- Delegated administrative permissions.
+- Accounts with unnecessary access.
+
+### Administrative Best Practices Summary
+
+| Practice | Security Benefit |
+|---|---|
+| Least Privilege | Reduces unnecessary access |
+| Separate Admin Accounts | Protects privileged credentials |
+| Regular Access Reviews | Removes excessive permissions |
+| Change Management | Reduces configuration mistakes |
+| Logging and Monitoring | Improves threat detection |
+| Backup and Recovery | Supports business continuity |
+| Documentation | Improves consistency and investigation |
+| MFA | Reduces the impact of stolen passwords |
+| Account Lifecycle Management | Prevents abandoned accounts from remaining active |
+
+---
+
+## 6. 🔗 How Active Directory Administration Works Together
+
+Let's understand how these five areas work together in a real company.
+
+Imagine a company called TechSecure.
+
+A new employee, Alice, joins the Security Department.
+
+### Step 1: User Management
+
+The administrator creates Alice's domain account.
+
+```text
+Username: alice
+Department: Security
+Status: Enabled
+```
+
+### Step 2: Group Management
+
+Alice is added to the appropriate security group.
+
+```text
+Security-Analysts
+```
+
+### Step 3: Access Control
+
+The security group receives access to the required resources.
+
+```text
+Security-Analysts
+        |
+        v
+Security Monitoring Folder
+        |
+        v
+Read / Modify Permissions
+```
+
+### Step 4: Security Configuration
+
+Alice's computer receives appropriate security policies.
+
+Examples:
+
+- Windows Firewall configuration.
+- Endpoint protection settings.
+- Audit settings.
+- Device restrictions.
+
+### Step 5: Administrative Practices
+
+The administrator documents the account creation, verifies permissions, and ensures that access follows company policy.
+
+```text
+            New Employee
+                  |
+                  v
+            Create Account
+                  |
+                  v
+            Assign Groups
+                  |
+                  v
+          Configure Permissions
+                  |
+                  v
+           Apply Security Policies
+                  |
+                  v
+            Verify and Audit
+                  |
+                  v
+          Monitor Account Activity
+```
+
+This is the basic administrative workflow of an Active Directory environment.
+
+---
+
+## 7. ⚔️ Active Directory Administration from a Cybersecurity Perspective
+
+Poor Active Directory administration can create opportunities for attackers.
+
+Understanding how administrative mistakes become security vulnerabilities is essential for security professionals.
+
+### Common Administrative Security Weaknesses
+
+| Weakness | Potential Impact |
+|---|---|
+| Excessive privileges | Unauthorized administrative access |
+| Weak service-account passwords | Credential compromise |
+| Unmonitored privileged groups | Undetected privilege escalation |
+| Inactive accounts | Potential unauthorized access |
+| Poor Group Policy configuration | Weakened domain security |
+| Unrestricted delegation | Excessive control over directory objects |
+| Shared administrator accounts | Reduced accountability |
+| Inadequate logging | Difficult incident investigation |
+| Unprotected backups | Directory compromise or data exposure |
+
+### Example: Privilege Escalation Through Group Management
+
+Imagine an ordinary employee account is accidentally added to a highly privileged group.
+
+```text
+        Ordinary User
+              |
+              v
+        Group Membership
+              |
+              v
+          Domain Admins
+              |
+              v
+      Extensive Domain Privileges
+```
+
+The user may now possess powerful administrative capabilities.
+
+A security team should detect and investigate unexpected changes to privileged group membership.
+
+### Defensive Monitoring Priorities
+
+Pay particular attention to:
+
+1. Unexpected additions to privileged groups.
+2. Creation of suspicious accounts.
+3. Unexpected password resets.
+4. Changes to sensitive Group Policy Objects.
+5. Unusual administrative logons.
+6. Disabled security controls.
+7. Suspicious directory replication activity.
+8. Unusual service-account authentication.
+
+### Blue Team vs Red Team Perspective
+
+| Blue Team | Red Team |
+|---|---|
+| Reviews user and group permissions | Identifies excessive permissions |
+| Monitors privileged group changes | Tests privilege escalation paths |
+| Audits account activity | Evaluates account security |
+| Secures service accounts | Assesses service-account weaknesses |
+| Reviews Group Policies | Identifies insecure policy configurations |
+| Protects domain controllers | Tests domain controller security under authorization |
+
+Both perspectives help improve enterprise security.
+
+---
+
+## 8. 🧪 Hands-on Lab: Active Directory Administration
+
+You can practice these administration tasks in your own isolated Windows Server lab.
+
+### Recommended Lab Setup
+
+| Machine | Purpose |
+|---|---|
+| Windows Server VM | Active Directory Domain Controller |
+| Windows 10/11 VM | Domain-joined client |
+| Kali Linux VM | Security assessment workstation |
+
+Use a private virtual network and test accounts. Do not perform these activities on an organization’s domain without explicit authorization.
+
+### Lab 1: Create a User
+
+Create a user named `student01`.
+
+```powershell
+New-ADUser `
+  -Name "Student One" `
+  -SamAccountName "student01" `
+  -UserPrincipalName "student01@lab.example.com" `
+  -Path "OU=Security,DC=lab,DC=example,DC=com" `
+  -Enabled $true `
+  -AccountPassword (Read-Host "Password" -AsSecureString)
+```
+
+Verify:
+
+```powershell
+Get-ADUser -Identity student01
+```
+
+### Lab 2: Create a Security Group
+
+```powershell
+New-ADGroup `
+  -Name "Lab-Security-Team" `
+  -SamAccountName "Lab-Security-Team" `
+  -GroupScope Global `
+  -GroupCategory Security `
+  -Path "OU=Security,DC=lab,DC=example,DC=com"
+```
+
+Verify:
+
+```powershell
+Get-ADGroup -Identity "Lab-Security-Team"
+```
+
+### Lab 3: Add a User to the Group
+
+```powershell
+Add-ADGroupMember `
+  -Identity "Lab-Security-Team" `
+  -Members student01
+```
+
+Verify:
+
+```powershell
+Get-ADGroupMember -Identity "Lab-Security-Team"
+```
+
+### Lab 4: Review User Group Membership
+
+```powershell
+Get-ADPrincipalGroupMembership -Identity student01
+```
+
+Identify the groups to which the account belongs.
+
+### Lab 5: Disable and Re-enable a User
+
+Disable:
+
+```powershell
+Disable-ADAccount -Identity student01
+```
+
+Check status:
+
+```powershell
+Get-ADUser student01 -Properties Enabled
+```
+
+Enable:
+
+```powershell
+Enable-ADAccount -Identity student01
+```
+
+### Lab 6: Explore File Permissions
+
+Create a test folder:
+
+```powershell
+New-Item -Path "C:\Lab\Finance" -ItemType Directory
+```
+
+Inspect its access control list:
+
+```powershell
+Get-Acl "C:\Lab\Finance" | Format-List
+```
+
+Explore the permissions assigned to different users and groups.
+
+### Lab 7: Review Security Events
+
+Open Event Viewer:
+
+```powershell
+eventvwr.msc
+```
+
+Navigate to:
+
+```text
+Windows Logs → Security
+```
+
+Search for events such as:
+
+- 4720 — User created.
+- 4724 — Password reset attempted.
+- 4725 — User disabled.
+- 4728 — Member added to global security group.
+- 4740 — Account locked out.
+
+The events will appear only when the appropriate auditing is configured and the activity occurs.
+
+### Lab 8: Review Privileged Group Membership
+
+Run:
+
+```powershell
+Get-ADGroupMember -Identity "Domain Admins"
+```
+
+Review the members of the Domain Admins group.
+
+**Your task:** Identify whether any ordinary test account has unnecessary administrative privileges. Do not modify production privileged groups during this exercise.
+
+---
+
+## 9. ⚡ Quick Revision
+
+### Important Concepts
+
+| Topic | Remember |
+|---|---|
+| User Management | Creates and maintains domain accounts |
+| Group Management | Organizes users and manages access through groups |
+| Security Group | Used to assign permissions |
+| Distribution Group | Used primarily for email distribution |
+| AGDLP | Accounts → Global → Domain Local → Permissions |
+| Access Control | Determines who can access resources and perform actions |
+| DACL | Controls allowed and denied access |
+| SACL | Defines which access attempts are audited |
+| NTFS Permissions | Control access to files and folders |
+| Share Permissions | Control access through SMB shares |
+| Security Configuration | Establishes secure domain settings |
+| Least Privilege | Gives only necessary permissions |
+| Change Management | Controls and documents administrative changes |
+| Auditing | Records security-related activities |
+
+### Important PowerShell Commands
+
+| Command | Purpose |
+|---|---|
+| `New-ADUser` | Creates a user |
+| `Get-ADUser` | Retrieves user information |
+| `Set-ADUser` | Modifies user attributes |
+| `Set-ADAccountPassword` | Changes or resets a password |
+| `Disable-ADAccount` | Disables an account |
+| `Enable-ADAccount` | Enables an account |
+| `Remove-ADUser` | Deletes a user |
+| `New-ADGroup` | Creates a group |
+| `Get-ADGroup` | Retrieves group information |
+| `Add-ADGroupMember` | Adds members to a group |
+| `Remove-ADGroupMember` | Removes members from a group |
+| `Get-ADGroupMember` | Lists group members |
+| `Get-ADPrincipalGroupMembership` | Lists a user's group memberships |
+| `Get-Acl` | Inspects an object's access control list |
+
+Most `*-AD*` commands require the Active Directory PowerShell module and appropriate permissions.
+
+### Key Takeaways
+
+1. User management controls the lifecycle of domain accounts.
+2. Group management simplifies access administration.
+3. Security groups are used to assign permissions.
+4. Access control determines what users can do.
+5. DACLs control access, while SACLs define auditing.
+6. NTFS and SMB share permissions work together for network file access.
+7. Security configuration protects domain identities and systems.
+8. Administrative accounts must follow least privilege.
+9. Logging and monitoring help identify suspicious administrative activity.
+10. Proper administration reduces the risk of Active Directory compromise.
+
+---
+
+## 10. 🎯 Active Recall & Exam Questions
+
+Try answering these questions without looking at the notes.
+
+1. What is Active Directory user management?
+2. Explain the lifecycle of a domain user account.
+3. What is the difference between a standard user and a service account?
+4. What is group management, and why is it important?
+5. Differentiate between security groups and distribution groups.
+6. Explain Global, Domain Local, and Universal group scopes.
+7. What is the AGDLP model?
+8. What is access control?
+9. Differentiate between authentication and authorization.
+10. What is an Access Control List?
+11. Explain the difference between DACL and SACL.
+12. What is the difference between NTFS and SMB share permissions?
+13. What is permission inheritance?
+14. What is the Principle of Least Privilege?
+15. Why should administrators use separate administrative accounts?
+16. What is the purpose of Group Policy security configuration?
+17. Why is monitoring privileged group membership important?
+18. What is change management?
+19. Why are Active Directory backups important?
+20. Explain five security best practices for Active Directory administration.
+
+<details>
+<summary><strong>✅ Check Your Answers</strong></summary>
+
+**1. User Management**
+
+The process of creating, configuring, maintaining, and removing user accounts in Active Directory.
+
+**2. User Account Lifecycle**
+
+Account creation → Group assignment → Permission configuration → Normal usage → Access review → Account disabling → Retention or deletion.
+
+**3. Standard User vs Service Account**
+
+A standard user account represents an employee. A service account provides an identity for an application or service.
+
+**4. Group Management**
+
+The process of organizing users into groups to simplify permission and access management.
+
+**5. Security vs Distribution Groups**
+
+Security groups assign permissions. Distribution groups are primarily used for email distribution.
+
+**6. Group Scopes**
+
+- Global: Commonly groups accounts from its own domain.
+- Domain Local: Used to assign permissions to resources in its own domain.
+- Universal: Can contain members from multiple domains in the same forest.
+
+**7. AGDLP**
+
+Accounts → Global Groups → Domain Local Groups → Permissions.
+
+**8. Access Control**
+
+Determines who can access a resource and which actions they can perform.
+
+**9. Authentication vs Authorization**
+
+Authentication verifies identity. Authorization determines permitted actions.
+
+**10. ACL**
+
+An Access Control List is a collection of entries defining permissions or auditing behavior for a securable object.
+
+**11. DACL vs SACL**
+
+DACL controls access. SACL defines which access attempts are audited.
+
+**12. NTFS vs Share Permissions**
+
+NTFS permissions apply to files and folders. Share permissions apply to access through SMB shares.
+
+**13. Permission Inheritance**
+
+Child files and folders can receive applicable permissions from parent folders.
+
+**14. Least Privilege**
+
+Giving users and administrators only the permissions required for their responsibilities.
+
+**15. Separate Administrative Accounts**
+
+They reduce exposure of privileged credentials during everyday activities and improve accountability.
+
+**16. Group Policy Security Configuration**
+
+It centrally enforces security settings across domain users and computers.
+
+**17. Privileged Group Monitoring**
+
+Unexpected membership changes can indicate privilege escalation or account compromise.
+
+**18. Change Management**
+
+A controlled process for requesting, approving, testing, implementing, and documenting configuration changes.
+
+**19. Active Directory Backups**
+
+They help recover directory services after accidental deletion, corruption, ransomware, or infrastructure failure.
+
+**20. Five Security Best Practices**
+
+- Apply least privilege.
+- Use separate administrative accounts.
+- Review group membership.
+- Monitor security events.
+- Maintain secure backups.
+
+</details>
+
+---
+
+## 🏁 Final Thought
+
+Active Directory administration is not simply about creating users and assigning permissions. It is about maintaining control over an organization's identity infrastructure.
+
+A good administrator ensures that:
+
+- Every user has an appropriate account.
+- Every group has a clear purpose.
+- Every permission has a business justification.
+- Every important configuration is secure.
+- Every administrative action can be reviewed and audited.
+
+> **In enterprise cybersecurity, controlling identities and permissions is one of the most important steps toward protecting the entire organization.**
