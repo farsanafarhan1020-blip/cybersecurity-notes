@@ -1,9 +1,3 @@
-No problem. Let's change the approach. Instead of continuing with individual questions, here's your **complete Module 10 revision note**.
-
-I've included all nine topics we studied, important definitions, practical examples, comparison tables, diagrams, Windows Event IDs, and exam points.
-
-It's designed for quick studying: **not too lengthy, but detailed enough to cover the important syllabus.**
-
 # 🛡️ MODULE 10 — IDENTITY & ACCESS MANAGEMENT (IAM) AND ACTIVE DIRECTORY
 
 # 1. Identity & Access Management (IAM)
@@ -1246,6 +1240,5 @@ Before entering your exam, make sure you can explain these without looking at th
 - [ ] AI applications in identity security.
 - [ ] IAM security reports.
 
-**My recommendation:** Study Topics 1–7 carefully, especially Active Directory and Windows Event IDs. Then quickly revise Topics 8–9. Don't spend too much time memorizing every detail; focus on understanding definitions, differences, examples, and security scenarios.
 
 You've already studied these concepts. This is a revision, not starting from zero. Good luck with your exam!
